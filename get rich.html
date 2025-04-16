@@ -1,0 +1,79 @@
+
+# Define the KV language string for the UI
+from turtle import Screen
+
+
+KV = '''
+ScreenManager:
+    LoginScreen:
+
+<LoginScreen>:
+    name: 'login'
+    MDBoxLayout:
+        orientation: 'vertical'
+        padding: 40
+        spacing: 20
+
+        MDLabel:
+            text: 'Welcome to Sree Dattha College App'
+            font_style: 'H4'
+            halign: 'center'
+            size_hint_y: None
+            height: self.texture_size[1]
+
+        MDTextField:
+            id: name
+            hint_text: 'Enter Your Name'
+            icon_left: 'account'
+            size_hint_x: None
+            width: 300
+            pos_hint: {'center_x': 0.5}
+
+        MDTextField:
+            id: branch
+            hint_text: 'Enter Your Branch'
+            icon_left: 'school'
+            size_hint_x: None
+            width: 300
+            pos_hint: {'center_x': 0.5}
+
+        MDTextField:
+            id: admission_number
+            hint_text: 'Enter Admission Number'
+            icon_left: 'numeric'
+            size_hint_x: None
+            width: 300
+            pos_hint: {'center_x': 0.5}
+
+        MDRectangleFlatButton:
+            text: 'Submit'
+            pos_hint: {'center_x': 0.5}
+            on_release: app.submit_details()
+'''
+
+# Define the Login Screen
+class LoginScreen(Screen):
+    pass
+
+# Main App Class
+class CollegeApp(MDApp):
+    def build(self):
+        self.theme_cls.primary_palette = 'Teal'  # Set the primary color
+        return Builder.load_string(KV)
+
+    def submit_details(self):
+        # Get the entered details
+        name = self.root.get_screen('login').ids.name.text
+        branch = self.root.get_screen('login').ids.branch.text
+        admission_number = self.root.get_screen('login').ids.admission_number.text
+
+        # Print the details (for now)
+        print(f"Name: {name}")
+        print(f"Branch: {branch}")
+        print(f"Admission Number: {admission_number}")
+
+        # You can add logic here to validate and process the data
+
+# Run the app
+if __name__ == '__main__':
+    CollegeApp().run()
